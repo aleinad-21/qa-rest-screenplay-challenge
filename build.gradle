@@ -1,18 +1,27 @@
 plugins {
+
+    // Java support
     id 'java'
+
+    // Serenity BDD plugin for reporting and test execution
     id 'net.serenity-bdd.serenity-gradle-plugin' version '4.2.34'
+
+    // Automatic code formatting
     id 'com.diffplug.spotless' version '7.0.2'
 }
-
 
 group = 'com.challenge'
 version = '1.0-SNAPSHOT'
 
 repositories {
+
+    // Main repository for dependencies
     mavenCentral()
 }
 
 java {
+
+    // Java version configuration
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
@@ -20,17 +29,18 @@ java {
 
 dependencies {
 
-    // Serenity BDD core and reporting - Integración base con Serenity
-    testImplementation 'net.serenity-bdd:serenity-core:4.2.34'
+    // Serenity BDD core and reporting
+    implementation 'net.serenity-bdd:serenity-core:4.2.34'
 
-    // Serenity integration with JUnit 5 
+    // Serenity integration with JUnit 5
     testImplementation 'net.serenity-bdd:serenity-junit5:4.2.34'
 
     // Screenplay pattern implementation
-    testImplementation 'net.serenity-bdd:serenity-screenplay:4.2.34'
+    implementation 'net.serenity-bdd:serenity-screenplay:4.2.34'
 
-    // REST API support for Screenplay
-    testImplementation 'net.serenity-bdd:serenity-screenplay-rest:4.2.34'
+    // REST API  for Screenplay
+    implementation 'net.serenity-bdd:serenity-screenplay-rest:4.2.34'
+    testImplementation 'net.serenity-bdd:serenity-ensure:4.2.34'
 
     // JSON serialization and deserialization
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.19.0'
@@ -38,25 +48,47 @@ dependencies {
     // Fluent assertions
     testImplementation 'org.assertj:assertj-core:3.27.3'
 
-    // Lombok support
+    // Lombok support for production code
     compileOnly 'org.projectlombok:lombok:1.18.38'
     annotationProcessor 'org.projectlombok:lombok:1.18.38'
 
     // Lombok support for test classes
     testCompileOnly 'org.projectlombok:lombok:1.18.38'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.38'
+
+    // Fake data generator for dynamic test data
+    implementation 'net.datafaker:datafaker:2.4.2'
 }
 
 spotless {
+
     java {
+
+        // Apply Google Java Style formatting
         googleJavaFormat()
     }
 }
 
 test {
+
+    // Enable JUnit 5 platform
     useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+        exceptionFormat = 'full'
+    }
 }
-// Temporal para ver que la configuración haya quedado bien
-tasks.named('checkOutcomes') {
-    enabled = false
+
+
+javadoc {
+
+    // UTF-8 encoding support for generated documentation
+    options.encoding = 'UTF-8'
+}
+
+serenity {
+
+    testRoot = "com.challenge"
 }
