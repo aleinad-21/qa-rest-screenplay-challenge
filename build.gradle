@@ -35,11 +35,11 @@ dependencies {
 
     testImplementation 'net.serenity-bdd:serenity-junit5:4.2.34'
 
-    // Mantén las otras igual (Jackson, Lombok, etc.)
+
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.19.0'
     testImplementation 'org.assertj:assertj-core:3.27.3'
     
-    // Lombok (puedes dejarlo como está o pasarlo todo a testCompileOnly/annotationProcessor si no tienes código en src/main)
+    // Lombok 
     compileOnly 'org.projectlombok:lombok:1.18.38'
     annotationProcessor 'org.projectlombok:lombok:1.18.38'
     testCompileOnly 'org.projectlombok:lombok:1.18.38'

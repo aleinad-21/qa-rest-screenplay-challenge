@@ -1,18 +1,19 @@
 package com.challenge.tasks;
 
-import com.challenge.interactions.api.PostRequest;
+import com.challenge.abilities.AuthenticateWithApi;
 import com.challenge.models.request.user.CreateUserRequest;
 import com.challenge.utils.constants.ApiResources;
 import lombok.RequiredArgsConstructor;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.rest.interactions.Post;
 
 /** Task responsible for creating a new user through the GoREST. */
 @RequiredArgsConstructor
 public class CreateUser implements Task {
 
   /** Request payload used to create the user. */
-  private final CreateUserRequest request;
+  private final CreateUserRequest payload;
 
   /**
    * Executes the user creation process.
@@ -22,6 +23,17 @@ public class CreateUser implements Task {
   @Override
   public <T extends Actor> void performAs(T actor) {
 
-    actor.attemptsTo(new PostRequest(ApiResources.USERS.getPath(), request));
+    String token = actor.abilityTo(AuthenticateWithApi.class).getToken();
+
+    actor.attemptsTo(
+        Post.to(ApiResources.USERS.getPath())
+            .with(
+                request ->
+                    request
+                        .log()
+                        .all()
+                        .header("Authorization", "Bearer " + token)
+                        .contentType("application/json")
+                        .body(payload)));
   }
 }

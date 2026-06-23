@@ -14,7 +14,9 @@ public final class CreateUserResult {
    * @return status code question
    */
   public static Question<Integer> statusCode() {
-    return actor -> SerenityRest.lastResponse().statusCode();
+
+    return Question.about("Response Status code")
+        .answeredBy(actor -> SerenityRest.lastResponse().statusCode());
   }
 
   /**
@@ -23,7 +25,8 @@ public final class CreateUserResult {
    * @return user id question
    */
   public static Question<Integer> userId() {
-    return actor -> SerenityRest.lastResponse().jsonPath().getInt("id");
+    return Question.about("Created user id")
+        .answeredBy(actor -> SerenityRest.lastResponse().jsonPath().getInt("id"));
   }
 
   /**
@@ -32,7 +35,8 @@ public final class CreateUserResult {
    * @return name question
    */
   public static Question<String> name() {
-    return actor -> SerenityRest.lastResponse().jsonPath().getString("name");
+    return Question.about("Created user name")
+        .answeredBy(actor -> SerenityRest.lastResponse().jsonPath().getString("name"));
   }
 
   /**
@@ -41,7 +45,8 @@ public final class CreateUserResult {
    * @return email question
    */
   public static Question<String> email() {
-    return actor -> SerenityRest.lastResponse().jsonPath().getString("email");
+    return Question.about("Created user email")
+        .answeredBy(actor -> SerenityRest.lastResponse().jsonPath().getString("email"));
   }
 
   /**
@@ -50,7 +55,8 @@ public final class CreateUserResult {
    * @return gender question
    */
   public static Question<String> gender() {
-    return actor -> SerenityRest.lastResponse().jsonPath().getString("gender");
+    return Question.about("Created user gender")
+        .answeredBy(actor -> SerenityRest.lastResponse().jsonPath().getString("gender"));
   }
 
   /**
@@ -59,7 +65,8 @@ public final class CreateUserResult {
    * @return status question
    */
   public static Question<String> userStatus() {
-    return actor -> SerenityRest.lastResponse().jsonPath().getString("status");
+    return Question.about("Created user status")
+        .answeredBy(actor -> SerenityRest.lastResponse().jsonPath().getString("status"));
   }
 
   /**
@@ -68,26 +75,8 @@ public final class CreateUserResult {
    * @return content type question
    */
   public static Question<String> contentType() {
-    return actor -> SerenityRest.lastResponse().getContentType();
-  }
-
-  /**
-   * Returns the response time in milliseconds.
-   *
-   * @return response time question
-   */
-  public static Question<Long> responseTime() {
-    return actor -> SerenityRest.lastResponse().time();
-  }
-
-  /**
-   * Returns a response header value.
-   *
-   * @param headerName header name
-   * @return header value question
-   */
-  public static Question<String> header(String headerName) {
-    return actor -> SerenityRest.lastResponse().getHeader(headerName);
+    return Question.about("Created user contentType")
+        .answeredBy(actor -> SerenityRest.lastResponse().getContentType());
   }
 
   /**
@@ -96,7 +85,8 @@ public final class CreateUserResult {
    * @return field name question
    */
   public static Question<String> errorField() {
-    return actor -> SerenityRest.lastResponse().jsonPath().getString("[0].field");
+    return Question.about("Description message error type")
+        .answeredBy(actor -> SerenityRest.lastResponse().jsonPath().getString("[0].field"));
   }
 
   /**
@@ -105,6 +95,7 @@ public final class CreateUserResult {
    * @return error message question
    */
   public static Question<String> errorMessage() {
-    return actor -> SerenityRest.lastResponse().jsonPath().getString("[0].message");
+    return Question.about("Description message error")
+        .answeredBy(actor -> SerenityRest.lastResponse().jsonPath().getString("[0].message"));
   }
 }

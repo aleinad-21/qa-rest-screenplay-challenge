@@ -3,6 +3,7 @@ package com.challenge.tests;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.Matchers.*;
 
+import com.challenge.abilities.AuthenticateWithApi;
 import com.challenge.factories.UserDataFactory;
 import com.challenge.models.request.user.CreateUserRequest;
 import com.challenge.questions.CreateUserResult;
@@ -29,6 +30,7 @@ public class CreateUserTest {
     actor = Actor.named("API User");
 
     actor.can(CallAnApi.at(EnvironmentConfig.getBaseUrl()));
+    actor.can(AuthenticateWithApi.using(EnvironmentConfig.getToken()));
   }
 
   @Test
