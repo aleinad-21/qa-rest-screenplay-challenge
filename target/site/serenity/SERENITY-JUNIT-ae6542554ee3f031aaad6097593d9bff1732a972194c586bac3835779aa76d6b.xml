@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="com.challenge.tests.CreateUserTest" skipped="0" tests="1" time="1.99" timestamp="2026-06-23 03:25:24"><testcase classname="com.challenge.tests.CreateUserTest" name="Should not create user without email"/></testsuite>
