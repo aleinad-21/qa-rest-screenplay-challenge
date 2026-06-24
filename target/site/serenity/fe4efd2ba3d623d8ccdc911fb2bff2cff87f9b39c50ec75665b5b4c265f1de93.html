@@ -234,7 +234,7 @@
             <a href="2a4631d87648e59c428d4cf0e9247f9d286e4679f436ca2ce872e931eb4dfd58.html"><i class="bi bi-chat-text"></i> Stories</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 24-06-2026 06:44</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 24-06-2026 09:06</span>
     <br style="clear:left"/>
 </div>
 
@@ -505,7 +505,7 @@
                                             <div class="col-sm-12">
                                                 <h3>Scenarios</h3>
 
-                                                    <a name="0853e562-d51c-4543-8a21-994c4f7bcbba"></a>
+                                                    <a name="73a1142d-97e0-48bb-acfb-560793762b01"></a>
                                                     <p class="rule-tags inline-tag">
                                                     </p>
 
@@ -532,9 +532,9 @@
                                                             </div>
                                                             <div class="scenario-docs card-body">
                                                                     <p>API User executes a POST on the resource /users</p>
-                                                                    <p>Then Response Status code should be (201)</p>
+                                                                    <p>Then Response status code should be (201)</p>
                                                                     <p>API User executes a POST on the resource /users</p>
-                                                                    <p>Then Response Status code should be (422)</p>
+                                                                    <p>Then Response status code should be (422)</p>
                                                                 <div class="examples">
                                                                 </div>
                                                             </div>
@@ -562,8 +562,9 @@
                                                             </div>
                                                             <div class="scenario-docs card-body">
                                                                     <p>API User executes a POST on the resource /users</p>
-                                                                    <p>Then Response Status code should be (422)</p>
-                                                                    <p>Then Created user contentType should be a string containing 'application/json'</p>
+                                                                    <p>Then Response status code should be (422)</p>
+                                                                    <p>Then Validation error field should be 'email'</p>
+                                                                    <p>Then Validation error message should be a string containing 'can't be blank'</p>
                                                                 <div class="examples">
                                                                 </div>
                                                             </div>
@@ -591,8 +592,9 @@
                                                             </div>
                                                             <div class="scenario-docs card-body">
                                                                     <p>API User executes a POST on the resource /users</p>
-                                                                    <p>Then Response Status code should be (422)</p>
-                                                                    <p>Then Created user contentType should be a string containing 'application/json'</p>
+                                                                    <p>Then Response status code should be (422)</p>
+                                                                    <p>Then Validation error field should be 'gender'</p>
+                                                                    <p>Then Validation error message should be a string containing 'can't be blank, can be male of female'</p>
                                                                 <div class="examples">
                                                                 </div>
                                                             </div>
@@ -620,8 +622,9 @@
                                                             </div>
                                                             <div class="scenario-docs card-body">
                                                                     <p>API User executes a POST on the resource /users</p>
-                                                                    <p>Then Response Status code should be (422)</p>
-                                                                    <p>Then Created user contentType should be a string containing 'application/json'</p>
+                                                                    <p>Then Response status code should be (422)</p>
+                                                                    <p>Then Validation error field should be 'status'</p>
+                                                                    <p>Then Validation error message should be a string containing 'can't be blank'</p>
                                                                 <div class="examples">
                                                                 </div>
                                                             </div>
@@ -649,13 +652,13 @@
                                                             </div>
                                                             <div class="scenario-docs card-body">
                                                                     <p>API User executes a POST on the resource /users</p>
-                                                                    <p>Then Response Status code should be (201)</p>
-                                                                    <p>Then Created user id should be not null</p>
-                                                                    <p>Then Created user name should be 'Jermaine Bins'</p>
-                                                                    <p>Then Created user email should be 'barney.metz@yahoo.com'</p>
-                                                                    <p>Then Created user gender should be 'female'</p>
-                                                                    <p>Then Created user status should be 'active'</p>
-                                                                    <p>Then Created user contentType should be a string containing 'application/json'</p>
+                                                                    <p>Then Response status code should be (201)</p>
+                                                                    <p>Then Response integer field: id should be not null</p>
+                                                                    <p>Then Response field: name should be 'Quentin Heathcote'</p>
+                                                                    <p>Then Response field: email should be 'joetta.hartmann@hotmail.com'</p>
+                                                                    <p>Then Response field: gender should be 'female'</p>
+                                                                    <p>Then Response field: status should be 'active'</p>
+                                                                    <p>Then Response content type should be a string containing 'application/json'</p>
                                                                 <div class="examples">
                                                                 </div>
                                                             </div>
@@ -683,8 +686,9 @@
                                                             </div>
                                                             <div class="scenario-docs card-body">
                                                                     <p>API User executes a POST on the resource /users</p>
-                                                                    <p>Then Response Status code should be (422)</p>
-                                                                    <p>Then Created user contentType should be a string containing 'application/json'</p>
+                                                                    <p>Then Response status code should be (422)</p>
+                                                                    <p>Then Validation error field should be 'name'</p>
+                                                                    <p>Then Validation error message should be a string containing 'can't be blank'</p>
                                                                 <div class="examples">
                                                                 </div>
                                                             </div>
@@ -739,7 +743,7 @@
                         <i class="bi bi-stopwatch"></i> Total
                         Duration
                     </td>
-                    <td>9s</td>
+                    <td>8s</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -749,7 +753,7 @@
                     <td>
                         <i class="bi bi-trophy"></i> Fastest Test
                     </td>
-                    <td>643ms</td>
+                    <td>738ms</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -760,13 +764,13 @@
                         <i class="bi bi-skip-start"></i> Slowest
                         Test
                     </td>
-                    <td>4s</td>
+                    <td>3s</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-flag-fill"></i> Tests Started
                     </td>
-                    <td>jun 24, 2026 06:44:28</td>
+                    <td>jun 24, 2026 09:06:14</td>
                     <td>
                         <i class="bi bi-stopwatch"></i> Average
                         Execution Time
@@ -778,12 +782,12 @@
                         <i class="bi bi-stop-circle"></i> Tests
                         Finished
                     </td>
-                    <td>jun 24, 2026 06:44:37</td>
+                    <td>jun 24, 2026 09:06:23</td>
                     <td>
                         <i class="bi bi-stopwatch-fill"></i> Total
                         Execution Time
                     </td>
-                    <td>9s</td>
+                    <td>8s</td>
                 </tr>
                 </tbody>
             </table>
@@ -815,8 +819,8 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>06:44:28</td>
-                                                                    <td>4s 362ms</td>
+                                                                    <td>09:06:14</td>
+                                                                    <td>3s 602ms</td>
                                                                     <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                     </td>
                                                                 </tr>
@@ -829,9 +833,9 @@
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
-                                                                    <td>3</td>
-                                                                    <td>06:44:32</td>
-                                                                    <td>686ms</td>
+                                                                    <td>4</td>
+                                                                    <td>09:06:17</td>
+                                                                    <td>1s 299ms</td>
                                                                     <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                     </td>
                                                                 </tr>
@@ -844,9 +848,9 @@
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
-                                                                    <td>3</td>
-                                                                    <td>06:44:33</td>
-                                                                    <td>971ms</td>
+                                                                    <td>4</td>
+                                                                    <td>09:06:19</td>
+                                                                    <td>874ms</td>
                                                                     <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                     </td>
                                                                 </tr>
@@ -859,9 +863,9 @@
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
-                                                                    <td>3</td>
-                                                                    <td>06:44:34</td>
-                                                                    <td>643ms</td>
+                                                                    <td>4</td>
+                                                                    <td>09:06:20</td>
+                                                                    <td>1s 117ms</td>
                                                                     <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                     </td>
                                                                 </tr>
@@ -875,8 +879,8 @@
                                                                     <td><span style="display:none"></span>
                                                                     </td>
                                                                     <td>8</td>
-                                                                    <td>06:44:35</td>
-                                                                    <td>1s 551ms</td>
+                                                                    <td>09:06:21</td>
+                                                                    <td>738ms</td>
                                                                     <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                     </td>
                                                                 </tr>
@@ -889,8 +893,8 @@
                                                                     </td>
                                                                     <td><span style="display:none"></span>
                                                                     </td>
-                                                                    <td>3</td>
-                                                                    <td>06:44:36</td>
+                                                                    <td>4</td>
+                                                                    <td>09:06:21</td>
                                                                     <td>1s 272ms</td>
                                                                     <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                     </td>
@@ -1224,7 +1228,7 @@
             datasets: [{
                 label: 'Number of tests per duration',
                 fill: false,
-                data: ['3','3','0','0','0','0','0','0'],
+                data: ['2','4','0','0','0','0','0','0'],
                 backgroundColor: 'rgba(83, 146, 255,0.5)',
                 borderColor: 'rgba(83, 146, 255, 1)',
             }]

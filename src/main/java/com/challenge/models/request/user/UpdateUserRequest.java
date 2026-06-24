@@ -3,11 +3,10 @@ package com.challenge.models.request.user;
 import lombok.Builder;
 import lombok.Data;
 
-/** Request model used to create a new user in the GoREST API. */
+/** /* Request model used to update user in the GoREST API. */
 @Data
 @Builder
-public class CreateUserRequest {
-
+public class UpdateUserRequest {
   /** User name. */
   private String name;
 

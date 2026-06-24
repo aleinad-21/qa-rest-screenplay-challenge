@@ -1,14 +1,16 @@
 package com.challenge.utils.constants;
 
-/**
- * Enum that contains the available API resource endpoints.
- *
- * <p>Each enum value represents a specific endpoint path used in REST API requests.
- */
+import lombok.Getter;
+
+/** Enum that contains the available API resource endpoints. */
+@Getter
 public enum ApiResources {
 
   /** Endpoint for user-related operations. */
-  USERS("/users");
+  USERS("/users"),
+
+  /** Endpoint for user-related update. */
+  USER_BY_ID("/users/{id}");
 
   /** Resource path associated with the endpoint. */
   private final String path;
@@ -20,14 +22,5 @@ public enum ApiResources {
    */
   ApiResources(String path) {
     this.path = path;
-  }
-
-  /**
-   * Returns the endpoint path associated with the resource.
-   *
-   * @return the API endpoint path
-   */
-  public String getPath() {
-    return path;
   }
 }

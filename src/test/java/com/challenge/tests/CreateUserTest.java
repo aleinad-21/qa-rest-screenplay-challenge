@@ -6,7 +6,7 @@ import static org.hamcrest.Matchers.*;
 import com.challenge.abilities.AuthenticateWithApi;
 import com.challenge.factories.UserDataFactory;
 import com.challenge.models.request.user.CreateUserRequest;
-import com.challenge.questions.CreateUserResult;
+import com.challenge.questions.ApiResult;
 import com.challenge.tasks.CreateUser;
 import com.challenge.utils.config.EnvironmentConfig;
 import io.restassured.RestAssured;
@@ -33,6 +33,7 @@ public class CreateUserTest {
     actor.can(AuthenticateWithApi.using(EnvironmentConfig.getToken()));
   }
 
+  /** Validates that a user be created . */
   @Test
   void createUserSuccessfully() {
 
@@ -41,13 +42,13 @@ public class CreateUserTest {
     actor.attemptsTo(new CreateUser(request));
 
     actor.should(
-        seeThat(CreateUserResult.statusCode(), equalTo(201)),
-        seeThat(CreateUserResult.userId(), notNullValue()),
-        seeThat(CreateUserResult.name(), equalTo(request.getName())),
-        seeThat(CreateUserResult.email(), equalTo(request.getEmail())),
-        seeThat(CreateUserResult.gender(), equalTo(request.getGender())),
-        seeThat(CreateUserResult.userStatus(), equalTo(request.getStatus())),
-        seeThat(CreateUserResult.contentType(), containsString("application/json")));
+        seeThat(ApiResult.statusCode(), equalTo(201)),
+        seeThat(ApiResult.intField("id"), notNullValue()),
+        seeThat(ApiResult.field("name"), equalTo(request.getName())),
+        seeThat(ApiResult.field("email"), equalTo(request.getEmail())),
+        seeThat(ApiResult.field("gender"), equalTo(request.getGender())),
+        seeThat(ApiResult.field("status"), equalTo(request.getStatus())),
+        seeThat(ApiResult.contentType(), containsString("application/json")));
   }
 
   /** Validates that a user cannot be created without an email address. */
@@ -61,8 +62,9 @@ public class CreateUserTest {
     actor.attemptsTo(new CreateUser(request));
 
     actor.should(
-        seeThat(CreateUserResult.statusCode(), equalTo(422)),
-        seeThat(CreateUserResult.contentType(), containsString("application/json")));
+        seeThat(ApiResult.statusCode(), equalTo(422)),
+        seeThat(ApiResult.errorField(), equalTo("email")),
+        seeThat(ApiResult.errorMessage(), containsString("can't be blank")));
   }
 
   /** Validates that a user cannot be created without a name. */
@@ -76,8 +78,9 @@ public class CreateUserTest {
     actor.attemptsTo(new CreateUser(request));
 
     actor.should(
-        seeThat(CreateUserResult.statusCode(), equalTo(422)),
-        seeThat(CreateUserResult.contentType(), containsString("application/json")));
+        seeThat(ApiResult.statusCode(), equalTo(422)),
+        seeThat(ApiResult.errorField(), equalTo("name")),
+        seeThat(ApiResult.errorMessage(), containsString("can't be blank")));
   }
 
   /** Validates that a duplicated email cannot be used to create another user. */
@@ -88,11 +91,9 @@ public class CreateUserTest {
 
     actor.attemptsTo(new CreateUser(request));
 
-    actor.should(seeThat(CreateUserResult.statusCode(), equalTo(201)));
-
+    actor.should(seeThat(ApiResult.statusCode(), equalTo(201)));
     actor.attemptsTo(new CreateUser(request));
-
-    actor.should(seeThat(CreateUserResult.statusCode(), equalTo(422)));
+    actor.should(seeThat(ApiResult.statusCode(), equalTo(422)));
   }
 
   /** Validates that a user cannot be created with an unsupported gender value. */
@@ -101,13 +102,14 @@ public class CreateUserTest {
 
     CreateUserRequest request = UserDataFactory.createRandomUser();
 
-    request.setGender("invalid-gender");
+    request.setGender("other");
 
     actor.attemptsTo(new CreateUser(request));
 
     actor.should(
-        seeThat(CreateUserResult.statusCode(), equalTo(422)),
-        seeThat(CreateUserResult.contentType(), containsString("application/json")));
+        seeThat(ApiResult.statusCode(), equalTo(422)),
+        seeThat(ApiResult.errorField(), equalTo("gender")),
+        seeThat(ApiResult.errorMessage(), containsString("can't be blank, can be male of female")));
   }
 
   /** Validates that a user cannot be created with an unsupported status value. */
@@ -121,7 +123,8 @@ public class CreateUserTest {
     actor.attemptsTo(new CreateUser(request));
 
     actor.should(
-        seeThat(CreateUserResult.statusCode(), equalTo(422)),
-        seeThat(CreateUserResult.contentType(), containsString("application/json")));
+        seeThat(ApiResult.statusCode(), equalTo(422)),
+        seeThat(ApiResult.errorField(), equalTo("status")),
+        seeThat(ApiResult.errorMessage(), containsString("can't be blank")));
   }
 }
