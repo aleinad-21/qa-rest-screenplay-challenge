@@ -3,7 +3,9 @@ package com.challenge.tasks;
 import com.challenge.abilities.AuthenticateWithApi;
 import com.challenge.models.request.user.CreateUserRequest;
 import com.challenge.utils.constants.ApiResources;
+import com.challenge.utils.constants.SessionVariables;
 import lombok.RequiredArgsConstructor;
+import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.rest.interactions.Post;
@@ -35,5 +37,10 @@ public class CreateUser implements Task {
                         .header("Authorization", "Bearer " + token)
                         .contentType("application/json")
                         .body(payload)));
+
+    if (SerenityRest.lastResponse().statusCode() == 201) {
+      actor.remember(
+          SessionVariables.USER_ID.getValue(), SerenityRest.lastResponse().jsonPath().getInt("id"));
+    }
   }
 }

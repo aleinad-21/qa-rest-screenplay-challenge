@@ -105,21 +105,17 @@
 
 
 
-
     <script class="code" type="text/javascript">$(document).ready(function () {
 
+
             $("#scenario-results").DataTable({
-                "order": [[0, "asc",], [1, "asc",], [2, "asc",]],
+                "order": [[0, "asc",], [3, "asc",]],
                 "language": {
                     searchPlaceholder: "Filter",
                     search: ""
                 },
                 columnDefs: [
-                    {
-                        targets: 4,
-                        visible: false
-                    },
-                    {type: 'time-elapsed-dhms', targets: 6}
+                    {type: 'time-elapsed-dhms', targets: 4}
                 ]
             })
             $("#manual-scenario-results").DataTable({
@@ -128,47 +124,17 @@
                     searchPlaceholder: "Filter",
                     search: ""
                 },
-                columnDefs: [
-                    {
-                        targets: 4,
-                        visible: false
-                    },
-                ]
             })
 
-            // Results table
-            $('#test-results-table').DataTable({
-                "order": [[0, "asc",], [3, "asc",]],
-                "pageLength": 10,
-                "lengthMenu": [[10, 25, 50, 100, 200, -1], [10, 25, 50, 100, 200, "All"]]
-            });
-
-            $('#evidence-table').DataTable({
-                searching: false,
-                paging: false,
-                info: false
-            });
-
-            $(".feature-coverage-table").DataTable({
-                searching: true,
-                paging: false,
-                info: false,
-                language: {
-                    searchPlaceholder: "Filter",
-                    search: ""
-                },
-            });
-
-            $(".feature-coverage-table-with-pagination").DataTable({
-                searching: true,
-                order: [[0, "asc",]],
-                pageLength: 10,
-                language: {
-                    searchPlaceholder: "Filter",
-                    search: ""
-                },
-            });
+        // Results table
+        $('#test-results-table').DataTable({
+            "order": [[0, "asc",], [3, "asc",]],
+            "pageLength": 100,
+            "lengthMenu": [[25, 50, 100, 200, -1], [25, 50, 100, 200, "All"]]
         });
+
+    })
+    ;
     </script>
 </head>
 
@@ -190,6 +156,7 @@
     <div id="contenttop">
         <div class="middlebg">
         <span class="breadcrumbs"><a href="index.html">Home</a>
+                > Feature 
         </span>
         </div>
         <div class="rightbg"></div>
@@ -229,10 +196,18 @@
                     <tr>
                         <td width="375px" valign="top">
                             <div class="test-count-summary">
-                                <div class="test-count-title">
+                                <div>
+
                                     6 tests
 
-                                    
+                                     |
+                                        <a href="938da69da5841c90ec4ffe8d05bd8d2b30aa71fea7af1228757f3e15f6571a0f.csv" title="Download CSV"> <i class="bi bi-cloud-arrow-down" title="Download CSV"></i></a>
+
+                                    <p class="report-info"><i class="bi bi-info-circle"></i> Note that results include
+                                        data-driven scenarios containing tests ,
+                                        which may also contain results other than tests .</p>
+
+
 
                                 </div>
                             </div>
@@ -240,8 +215,7 @@
                             <div>
                                 <ul class="nav nav-tabs">
                                     <li class="active">
-                                        <a data-toggle="tab" href="#summary"><i class="bi bi-house-door"></i>
-                                            Summary</a>
+                                        <a data-toggle="tab" href="#summary"><i class="bi bi-house-door"></i> Summary</a>
                                     </li>
                                     <li>
                                         <a data-toggle="tab" href="#tests"><i class="bi bi-speedometer"></i> Test
@@ -249,48 +223,12 @@
                                     </li>
                                 </ul>
 
-
                                 <div class="card border">
                                     <div class="tab-content" id="pills-tabContent">
                                         <div id="summary" class="tab-pane fade in active">
                                             <div class="container-fluid">
-                                                <div class="dashboard-charts row">
-                                                    <div class="col-lg-4 col-md-6 col-sm-9">
-                                                        <!-- PIE CHART -->
-                                                        <h4><i class="bi bi-pie-chart"></i> Overview</h4>
-                                                            <div class="chart-container">
-                                                                <canvas id="resultChart" height="200px"></canvas>
-                                                            </div>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-6 col-sm-9">
-                                                        <h4><i class="bi bi-check-square"></i> Test Outcomes</h4>
-                                                        <!-- Severity bar chart -->
-                                                        <div class="chart-container">
-                                                            <canvas id="severityChart" height="200px"></canvas>
-                                                        </div>
-                                                    </div>
-                                                        <div class="col-lg-4 col-md-6 col-sm-9">
-                                                            <h4><i class="bi bi-graph-up"></i> Test Performance</h4>
-
-                                                            <!-- Duration bar chart -->
-                                                            <div class="chart-container">
-                                                                <canvas id="durationChart" height="200px"></canvas>
-                                                            </div>
-                                                        </div>
-                                                </div>
-                                            </div>
-                                            <div class="container-fluid">
                                                 <div class="row">
-                                                        <div class="col-lg-8 col-md-8 col-sm-9">
-                                                            <!-- High level coverage bar chart -->
-                                                            <div class="chart-container">
-                                                                <h3><i class="bi bi-reception-3"></i> Functional
-                                                                    Coverage Overview</h3>
-                                                                <h4>Features</h4>
-                                                                <canvas id="coverageChart"></canvas>
-                                                            </div>
-                                                        </div>
-                                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                                    <div class="col-sm-4">
     <div>
         <h3><i class="bi bi-speedometer2"></i> Key Statistics</h3>
         <div>
@@ -360,8 +298,37 @@
         </div>
     </div>
                                                     </div>
+                                                    <div class="col-sm-4">
+                                                        <h4><i class="bi bi-check-square"></i> Test Outcomes</h4>
+                                                        <!-- Severity bar chart -->
+                                                        <div class="chart-container" style="position: relative; width:30vw">
+                                                            <canvas id="severityChart" width="300" height="300"></canvas>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        <h4><i class="bi bi-graph-up"></i> Test Performance</h4>
+
+                                                        <!-- Duration bar chart -->
+                                                        <div class="chart-container" style="position: relative; width:30vw">
+                                                            <canvas id="durationChart" width="300" height="300"></canvas>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <!-- High level coverage bar chart -->
+                                                            <div class="chart-container" style="position: relative; width:60vw">
+                                                                <h3><i class="bi bi-reception-3"></i> Functional Coverage Overview</h3>
+                                                                <h4>Features</h4>
+                                                                <canvas id="coverageChart"></canvas>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+
                                             <div class="container-fluid">
                                                     <div class="row">
                                                         <div class="col-sm-11">
@@ -370,12 +337,12 @@
 
                                                                     <h4>Features</h4>
 
-                                                                    <table class="table feature-coverage-table" id="Feature" style="width:100%">
+                                                                    <table class="table feature-coverage-table" id="Feature">
                                                                         <thead>
                                                                         <tr>
                                                                             <th>Feature</th>
-                                                                            <th style="width:1em;">Scenarios</th>
                                                                             <th style="width:1em;">Test&nbsp;Cases</th>
+                                                                            <th style="width:1em;">Scenarios</th>
                                                                             <th style="width:1em;">%&nbsp;Pass</th>
                                                                             <th style="width:1em;">Result</th>
                                                                             <th>Coverage</th>
@@ -384,7 +351,7 @@
                                                                         <tbody>
                                                                                 <tr>
                                                                                     <td>
-                                                                                            <a href="51370dece9e9a61a25a52f18b0f4463a40218e2bfd631694c648d496536520b1.html"> Challenge</a>
+                                                                                            <a href="51370dece9e9a61a25a52f18b0f4463a40218e2bfd631694c648d496536520b1.html" > Challenge</a>
                                                                                     </td>
                                                                                     <td>6</td>
                                                                                     <td>6</td>
@@ -407,7 +374,7 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td>
-                                                                                            <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html"> Create user test</a>
+                                                                                            <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html" > Create user test</a>
                                                                                     </td>
                                                                                     <td>6</td>
                                                                                     <td>6</td>
@@ -437,188 +404,98 @@
                                             <div class="container-fluid">
                                             </div>
                                         </div>
-                                        <div id="tests" class="tab-pane fade">
+                                        <div id="tests" class="tab-pane fade in">
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-sm-12">
-    <div>
-        <h3><i class="bi bi-speedometer2"></i> Key Statistics</h3>
-        <div>
-            <table class="table table-striped table-hover">
-                <tbody>
-                <tr scope="row">
-                    <td>
-                        <i class="bi bi-card-checklist"></i> Number of Scenarios
-                    </td>
-                    <td>6</td>
-                    <td>
-                        <i class="bi bi-stopwatch"></i> Total
-                        Duration
-                    </td>
-                    <td>9s</td>
-                </tr>
-                <tr scope="row">
-                    <td>
-                        <i class="bi bi-caret-right"></i> Total Number of Test Cases
-                    </td>
-                    <td>6</td>
-                    <td>
-                        <i class="bi bi-trophy"></i> Fastest Test
-                    </td>
-                    <td>643ms</td>
-                </tr>
-                <tr scope="row">
-                    <td>
-                        <i class="bi bi-person"></i> Number of Manual Test Cases
-                    </td>
-                    <td>0</td>
-                    <td>
-                        <i class="bi bi-skip-start"></i> Slowest
-                        Test
-                    </td>
-                    <td>4s</td>
-                </tr>
-                <tr scope="row">
-                    <td>
-                        <i class="bi bi-flag-fill"></i> Tests Started
-                    </td>
-                    <td>jun 24, 2026 06:44:28</td>
-                    <td>
-                        <i class="bi bi-stopwatch"></i> Average
-                        Execution Time
-                    </td>
-                    <td>1s</td>
-                </tr>
-                <tr scope="row">
-                    <td>
-                        <i class="bi bi-stop-circle"></i> Tests
-                        Finished
-                    </td>
-                    <td>jun 24, 2026 06:44:37</td>
-                    <td>
-                        <i class="bi bi-stopwatch-fill"></i> Total
-                        Execution Time
-                    </td>
-                    <td>9s</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                                                        <h3><i class="bi bi-gear"></i> Automated Tests</h3>
 
-                                                        <h3><i class="bi bi-gear"></i> Automated Scenarios</h3>
-
-                                                            <table class="scenario-result-table table" id="scenario-results" style="width:100%">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>story</th>
-                                                                    <th class="test-name-column">Scenario</th>
-                                                                    <th>Context</th>
-                                                                    <th>Steps</th>
-                                                                    <th>Started</th>
-                                                                    <th>Total Duration</th>
-                                                                    <th>Result</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr class="scenario-result SUCCESS">
-                                                                        <td>
-                                                                                <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
-                                                                        </td>
-                                                                        <td data-order="Should not create user with duplicated email">
-                                                                                    <a href="7c41d312831bd6b3cb4a37c1572f62e2ad9afa8cd457492ca056e914c378313c.html">Should not create user with duplicated email</a>
-                                                                        </td>
-                                                                        <td><span style="display:none"></span>
-                                                                        </td>
-                                                                        <td>4</td>
-                                                                        <td data-order="1782301468">06:44:28</td>
-                                                                        <td>4s 362ms</td>
-                                                                        <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span
-                                                                                    style="display:none">SUCCESS</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="scenario-result SUCCESS">
-                                                                        <td>
-                                                                                <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
-                                                                        </td>
-                                                                        <td data-order="Should not create user without email">
-                                                                                    <a href="ae6542554ee3f031aaad6097593d9bff1732a972194c586bac3835779aa76d6b.html">Should not create user without email</a>
-                                                                        </td>
-                                                                        <td><span style="display:none"></span>
-                                                                        </td>
-                                                                        <td>3</td>
-                                                                        <td data-order="1782301472">06:44:32</td>
-                                                                        <td>686ms</td>
-                                                                        <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span
-                                                                                    style="display:none">SUCCESS</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="scenario-result SUCCESS">
-                                                                        <td>
-                                                                                <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
-                                                                        </td>
-                                                                        <td data-order="Should not create user with invalid gender">
-                                                                                    <a href="d934e21fab3714b401e9cace1384d72e1ec54a493990f7fdfee3c36354a94d72.html">Should not create user with invalid gender</a>
-                                                                        </td>
-                                                                        <td><span style="display:none"></span>
-                                                                        </td>
-                                                                        <td>3</td>
-                                                                        <td data-order="1782301473">06:44:33</td>
-                                                                        <td>971ms</td>
-                                                                        <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span
-                                                                                    style="display:none">SUCCESS</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="scenario-result SUCCESS">
-                                                                        <td>
-                                                                                <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
-                                                                        </td>
-                                                                        <td data-order="Should not create user with invalid status">
-                                                                                    <a href="138289614bad6eb89e790984f6c4abfeb500c7c7a9ddaa639be2dbb811eab587.html">Should not create user with invalid status</a>
-                                                                        </td>
-                                                                        <td><span style="display:none"></span>
-                                                                        </td>
-                                                                        <td>3</td>
-                                                                        <td data-order="1782301474">06:44:34</td>
-                                                                        <td>643ms</td>
-                                                                        <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span
-                                                                                    style="display:none">SUCCESS</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="scenario-result SUCCESS">
-                                                                        <td>
-                                                                                <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
-                                                                        </td>
-                                                                        <td data-order="Create user successfully">
-                                                                                    <a href="d6bbe73508c89f2a76cd080941839455a61be2a550cce343111c415bd906cb73.html">Create user successfully</a>
-                                                                        </td>
-                                                                        <td><span style="display:none"></span>
-                                                                        </td>
-                                                                        <td>8</td>
-                                                                        <td data-order="1782301475">06:44:35</td>
-                                                                        <td>1s 551ms</td>
-                                                                        <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span
-                                                                                    style="display:none">SUCCESS</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="scenario-result SUCCESS">
-                                                                        <td>
-                                                                                <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
-                                                                        </td>
-                                                                        <td data-order="Should not create user without name">
-                                                                                    <a href="e5604c7b60d495827e32fa392960c0f0b1c54f5b35a286071c485aa457969a5d.html">Should not create user without name</a>
-                                                                        </td>
-                                                                        <td><span style="display:none"></span>
-                                                                        </td>
-                                                                        <td>3</td>
-                                                                        <td data-order="1782301476">06:44:36</td>
-                                                                        <td>1s 272ms</td>
-                                                                        <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span
-                                                                                    style="display:none">SUCCESS</span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
+                                            <table class="scenario-result-table table" id="scenario-results">
+                                                <thead>
+                                                <tr>
+                                                    <th>story</th>
+                                                    <th class="test-name-column">Scenario</th>
+                                                    <th>Steps</th>
+                                                    <th>Started</th>
+                                                    <th>Total Duration</th>
+                                                    <th>Result</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr class="scenario-result SUCCESS">
+                                                            <td>
+                                                                    <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
+                                                            </td>
+                                                            <td><a href="7c41d312831bd6b3cb4a37c1572f62e2ad9afa8cd457492ca056e914c378313c.html">Should not create user with duplicated email</a>
+                                                            </td>
+                                                            <td>4</td>
+                                                            <td>06:44:28</td>
+                                                            <td>4s 362ms</td>
+                                                            <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="scenario-result SUCCESS">
+                                                            <td>
+                                                                    <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
+                                                            </td>
+                                                            <td><a href="ae6542554ee3f031aaad6097593d9bff1732a972194c586bac3835779aa76d6b.html">Should not create user without email</a>
+                                                            </td>
+                                                            <td>3</td>
+                                                            <td>06:44:32</td>
+                                                            <td>686ms</td>
+                                                            <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="scenario-result SUCCESS">
+                                                            <td>
+                                                                    <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
+                                                            </td>
+                                                            <td><a href="d934e21fab3714b401e9cace1384d72e1ec54a493990f7fdfee3c36354a94d72.html">Should not create user with invalid gender</a>
+                                                            </td>
+                                                            <td>3</td>
+                                                            <td>06:44:33</td>
+                                                            <td>971ms</td>
+                                                            <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="scenario-result SUCCESS">
+                                                            <td>
+                                                                    <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
+                                                            </td>
+                                                            <td><a href="138289614bad6eb89e790984f6c4abfeb500c7c7a9ddaa639be2dbb811eab587.html">Should not create user with invalid status</a>
+                                                            </td>
+                                                            <td>3</td>
+                                                            <td>06:44:34</td>
+                                                            <td>643ms</td>
+                                                            <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="scenario-result SUCCESS">
+                                                            <td>
+                                                                    <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
+                                                            </td>
+                                                            <td><a href="d6bbe73508c89f2a76cd080941839455a61be2a550cce343111c415bd906cb73.html">Create user successfully</a>
+                                                            </td>
+                                                            <td>8</td>
+                                                            <td>06:44:35</td>
+                                                            <td>1s 551ms</td>
+                                                            <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="scenario-result SUCCESS">
+                                                            <td>
+                                                                    <a href="fe4efd2ba3d623d8ccdc911fb2bff2cff87f9b39c50ec75665b5b4c265f1de93.html">CreateUserTest</a>
+                                                            </td>
+                                                            <td><a href="e5604c7b60d495827e32fa392960c0f0b1c54f5b35a286071c485aa457969a5d.html">Should not create user without name</a>
+                                                            </td>
+                                                            <td>3</td>
+                                                            <td>06:44:36</td>
+                                                            <td>1s 272ms</td>
+                                                            <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
+                                                            </td>
+                                                        </tr>
+                                                </tbody>
+                                            </table>
 
                                                     </div>
                                                 </div>
@@ -627,7 +504,7 @@
                                                     <div class="col-sm-12">
                                                         <h3><i class="bi bi-hand-index-thumb"></i> Manual Tests</h3>
 
-                                                            No manual tests were recorded
+                                                No manual tests were recorded
 
                                                     </div>
                                                 </div>
@@ -635,11 +512,11 @@
                                             <div class="container-fluid">
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </td>
+
                     </tr>
                 </table>
             </div>
@@ -665,21 +542,21 @@
 
         // Options define for display value on top of bars
         const outcomeDetailsReports = [
-            { title: 'Passing Test Cases', link: "01f5288b80adbd3af52a8ed68a4a616d3164f750229f80da1ef344382d948835.html" },
-            { title: 'Pending Test Cases', link: "bde4fca42ca8baa0fe2eac76a241c84327dfe4ca903a1daa7cae83a1035d4745.html" },
-            { title: 'Ignored Test Cases', link: "c1b352893c3d69e59317fd825f20a75f987a859afe98fb4434f47dce70c48fd4.html" },
-            { title: 'Skipped Test Cases', link: "7409dbb9985b960343780b303d8028480bd55e9aebd855c90eff0a000e21ccc8.html" },
-            { title: 'Aborted Test Cases',  link: "91152e032be7fe762aa6823d6424278e2c72efeb7622a5e63c7bf5980b4fd8a0.html"},
-            { title: 'Failed Test Cases', link: "da5b0c51b332adf0ef993a9f086d6a1b51a3d800248ec6ae281212092f35bd37.html"  },
-            { title: 'Broken Test Cases', link: "c8a926210aeff57f8aa7ea799262d4b730915a909cd5ecd6a705b1fa13bc7aa8.html"    },
-            { title: 'Compromised Test Cases',  link: "02dd8f8ada4c10b8ebb5c1f309605a6f7c147adc21bcf5c55829855ba045ff03.html" },
+            { title: 'Passing Test Cases', link: "edc374586a908e4289ec1909868a9f52772dd39600db5089353202da90eca776.html" },
+            { title: 'Pending Test Cases', link: "b5e1d9fc9a7f6365b177c5b1c82a63255c6b5cc3ef075725c841e6f1987f462d.html" },
+            { title: 'Ignored Test Cases', link: "15b1e05e5f8a347e57ba862fae5af09260349dc0f5e22bac4c1e87e16e3f5297.html" },
+            { title: 'Skipped Test Cases', link: "25a8fb388fe576e2a7343f9d3bcd34ad3207c4d3710287212f0798983ae9fd23.html" },
+            { title: 'Aborted Test Cases',  link: "45691b1fe1a0828483e27329f9cd2f127ebb003a8ee2b55c8d869e64d438d819.html"},
+            { title: 'Failed Test Cases', link: "91a6c50f441f2e23b14a58bba0c8a990a8909b3206a66044829cbff3061854b1.html"  },
+            { title: 'Broken Test Cases', link: "6cd98501923b34f6b2240622790d75bc714fe45c1805d50380ded660becdfc03.html"    },
+            { title: 'Compromised Test Cases',  link: "0b383b1901a6ae5cd6ef469aff0149bd67136589904bde95cff8cf405fa94702.html" },
         ]
         const outcomeData = {
             labels: ['Passing Test Cases', 'Pending Test Cases', 'Ignored Test Cases', 'Skipped Test Cases', 'Aborted Test Cases', 'Failed Test Cases', 'Broken Test Cases', 'Compromised Test Cases','Undefined Test Cases'],
             datasets: [{
                 label: 'Test Results',
                 fill: false,
-                data: [6,0,0,0,0,0,0,0],
+                data: [{meta: 'Passing tests', value: 6}, {meta: 'Pending tests', value: 0}, {meta: 'Ignored tests', value: 0}, {meta: 'Skipped tests', value: 0}, {meta: 'Aborted tests', value: 0}, {meta: 'Failing tests', value: 0}, {meta: 'Broken tests', value: 0}, {meta: 'Compromised tests', value: 0}],
                 backgroundColor: ['rgba(153,204,51,0.5)','rgba(165, 199, 238, 0.5)','rgba(168, 168, 168, 0.5)','rgba(238, 224, 152, 0.75)','rgba(255, 153, 102, 0.5)','rgba(255, 22, 49, 0.5)','rgba(255, 97, 8, 0.5)','rgba(255, 104, 255, 0.5)','rgba(83, 50, 168, 0.5)'],
                 borderColor: ['rgba(153,204,51,1)','rgba(165, 199, 238, 1)','rgba(168, 168, 168, 1)','rgba(238, 224, 152, 1)','rgba(255, 153, 102, 1)','rgba(255, 22, 49, 1)','rgba(255, 97, 8, 1)','rgba(255, 104, 255, 1)','rgba(83, 50, 168, 1)'],
                 borderWidth: 1,
@@ -761,14 +638,14 @@
         // Options define for display value on top of bars
 
         const severityDetailsReports = [
-            { title: 'Passing Scenarios', link: "01f5288b80adbd3af52a8ed68a4a616d3164f750229f80da1ef344382d948835.html" },
-            { title: 'Pending Scenarios', link: "bde4fca42ca8baa0fe2eac76a241c84327dfe4ca903a1daa7cae83a1035d4745.html" },
-            { title: 'Ignored Scenarios', link: "c1b352893c3d69e59317fd825f20a75f987a859afe98fb4434f47dce70c48fd4.html" },
-            { title: 'Skipped Scenarios', link: "7409dbb9985b960343780b303d8028480bd55e9aebd855c90eff0a000e21ccc8.html" },
-            { title: 'Aborted Scenarios',  link: "91152e032be7fe762aa6823d6424278e2c72efeb7622a5e63c7bf5980b4fd8a0.html"},
-            { title: 'Failed Scenarios', link: "da5b0c51b332adf0ef993a9f086d6a1b51a3d800248ec6ae281212092f35bd37.html"  },
-            { title: 'Broken Scenarios', link: "c8a926210aeff57f8aa7ea799262d4b730915a909cd5ecd6a705b1fa13bc7aa8.html"    },
-            { title: 'Compromised Scenarios',  link: "02dd8f8ada4c10b8ebb5c1f309605a6f7c147adc21bcf5c55829855ba045ff03.html" },
+            { title: 'Passing Scenarios', link: "edc374586a908e4289ec1909868a9f52772dd39600db5089353202da90eca776.html" },
+            { title: 'Pending Scenarios', link: "b5e1d9fc9a7f6365b177c5b1c82a63255c6b5cc3ef075725c841e6f1987f462d.html" },
+            { title: 'Ignored Scenarios', link: "15b1e05e5f8a347e57ba862fae5af09260349dc0f5e22bac4c1e87e16e3f5297.html" },
+            { title: 'Skipped Scenarios', link: "25a8fb388fe576e2a7343f9d3bcd34ad3207c4d3710287212f0798983ae9fd23.html" },
+            { title: 'Aborted Scenarios',  link: "45691b1fe1a0828483e27329f9cd2f127ebb003a8ee2b55c8d869e64d438d819.html"},
+            { title: 'Failed Scenarios', link: "91a6c50f441f2e23b14a58bba0c8a990a8909b3206a66044829cbff3061854b1.html"  },
+            { title: 'Broken Scenarios', link: "6cd98501923b34f6b2240622790d75bc714fe45c1805d50380ded660becdfc03.html"    },
+            { title: 'Compromised Scenarios',  link: "0b383b1901a6ae5cd6ef469aff0149bd67136589904bde95cff8cf405fa94702.html" },
         ]
         const severityData = {
             labels: ['Passing', 'Pending', 'Ignored', 'Skipped', 'Aborted', 'Failed', 'Broken', 'Compromised'],
@@ -839,14 +716,14 @@
 
         // Options define for display value on top of bars
         const durationDetailsReports = [
-                {title: "Under 1 second", link: "2a5b6a7be0f08df02d8ab0b4d4c68648c2695c6c7ef0658c71de4d42b1415b18.html"},
-                {title: "1 to 10 seconds", link: "6c5512236937b92cd7a296b24edb966c2bd94be46b8910f8b129a42d6150eb25.html"},
-                {title: "10 to 30 seconds", link: "34658a1663fcf042bd7acb3325affbe4e647c8acd84d0228be2f52e1381e61b9.html"},
-                {title: "30 to 60 seconds", link: "5698da923f295f46ce5ab64ced2311fc60caa4e36b32112606d3adcfdce3f60b.html"},
-                {title: "1 to 2 minutes", link: "c68fd6639ab29c4b0ac02a78bc39f4e22557bcaa40ef14c903ac0e584626edfe.html"},
-                {title: "2 to 5 minutes", link: "3ce388ea8511800032930896a3e5ba2c4f80e46f1a10b143b67009baf212c6a0.html"},
-                {title: "5 to 10 minutes", link: "376e1536bb68812a880e84ca7a0c6d104d541788793f22a36b4462a6a9aaa344.html"},
-                {title: "10 minutes or over", link: "24bba6f5cf4f06c7d46bf8990b86c4fbc1ce4ce201644ddf42661c84031e1c90.html"},
+                {title: "Under 1 second", link: "db52a64a241fdf3504bf0fd8f2c6b485559fd44b7a8109c95f3195bc75fd0515.html"},
+                {title: "1 to 10 seconds", link: "0a9538966550bec2f4ecadd73307952176439747ef32da7482891a9d08edf13f.html"},
+                {title: "10 to 30 seconds", link: "25e3b23d6efd1fb3b8361babef60424addb1e359f496aa57d6905cbefc241321.html"},
+                {title: "30 to 60 seconds", link: "3f590a2ea3260739dde8e16c0f0877049586ca97016aadf024040ac4b3a8226b.html"},
+                {title: "1 to 2 minutes", link: "859b7008e0ecfabb73935fe9bde837784bae15a31779cef34b2e8d40406cb904.html"},
+                {title: "2 to 5 minutes", link: "ea755bf4f6b07292a7d827a149be81bfe4602994cdbc24bce3daa1811698e4d2.html"},
+                {title: "5 to 10 minutes", link: "22cb6f1cad7133b5b9aad98040b7b635cf0c29118a7b70d51fd8ecbe080d009d.html"},
+                {title: "10 minutes or over", link: "83e2eb82eac1e2a29f70e951a10762071e6de46a152d15d8148869fa6fcb9b66.html"},
         ]
         // The Severity bar chart
         const durationChartCtx = document.getElementById('durationChart');
