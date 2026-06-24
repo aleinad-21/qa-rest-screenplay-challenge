@@ -3,35 +3,18 @@ package com.challenge.tests;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.Matchers.*;
 
-import com.challenge.abilities.AuthenticateWithApi;
 import com.challenge.factories.UserDataFactory;
 import com.challenge.models.request.user.CreateUserRequest;
 import com.challenge.questions.ApiResult;
 import com.challenge.tasks.CreateUser;
-import com.challenge.utils.config.EnvironmentConfig;
-import io.restassured.RestAssured;
+import com.challenge.tests.base.BaseConfigTest;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
-import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+/** Test suite for Create User endpoint. */
 @ExtendWith(SerenityJUnit5Extension.class)
-public class CreateUserTest {
-
-  private Actor actor;
-
-  @BeforeEach
-  void setUp() {
-
-    RestAssured.useRelaxedHTTPSValidation();
-
-    actor = Actor.named("API User");
-
-    actor.can(CallAnApi.at(EnvironmentConfig.getBaseUrl()));
-    actor.can(AuthenticateWithApi.using(EnvironmentConfig.getToken()));
-  }
+public class CreateUserTest extends BaseConfigTest {
 
   /** Validates that a user be created . */
   @Test

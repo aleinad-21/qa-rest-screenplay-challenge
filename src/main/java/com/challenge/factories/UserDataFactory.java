@@ -1,6 +1,7 @@
 package com.challenge.factories;
 
 import com.challenge.models.request.user.CreateUserRequest;
+import com.challenge.models.request.user.UpdateUserRequest;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.datafaker.Faker;
@@ -21,6 +22,20 @@ public final class UserDataFactory {
     return CreateUserRequest.builder()
         .name(FAKER.name().fullName())
         .email(FAKER.internet().emailAddress())
+        .gender("female")
+        .status("active")
+        .build();
+  }
+
+  /**
+   * Set data user request object.
+   *
+   * @return a CreateUserRequest with random data
+   */
+  public static UpdateUserRequest createUpdatedUser() {
+    return UpdateUserRequest.builder()
+        .name("Tyber Updated")
+        .email("tyber" + FAKER.number().digits(4) + "@mail.com")
         .gender("female")
         .status("active")
         .build();
